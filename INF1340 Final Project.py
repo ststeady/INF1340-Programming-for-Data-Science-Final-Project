@@ -143,26 +143,29 @@ print("DIAGNOSTIC ANALYSIS")
 print("\n","The diagnostic analysis for the chosen variables are as follows:","\n")
 
 def two_var_diag(output_df,var1,value1,var2,value2):
-    for i in df_0.index:
-        if df_0[(df_0[str(var1)] > int(value1)) & (df_0[str(var2)] > int(value2))]:
-            count = len(output_df[output_df["output"]==1])
-            return(count)
-        
+    return(output_df[(output_df[var1] > value1) & (output_df[var2] > value2)].shape[0])
     
-    
+def two_var_diag1(output_df,var1,value1,var2,value2):
+    return(output_df[(output_df[var1] == value1) & (output_df[var2] == value2)].shape[0])
 
-#1) Age & Chol above avg, return number of higher risk counts
-    #if age > 56(avg) and chol > 251, return number of higher and lesser risk counts
-print(two_var_diag(df_0,"age",56,"chol",251))
+#1) If Age & Chol above avg, return number of lower and higher risk counts
+print("Num. of individuals classified as 'Low risk' and have above average 'Age' and 'Chol' are",two_var_diag(df_0,"age",56,"chol",251))
+print("Num. of individuals classified as 'High risk' and have above average 'Age' and 'Chol' are",two_var_diag(df_1,"age",56,"chol",251))
+print("\n")
 
-#2) Age & fbs above avg, return number of higher risk counts
-    #if age > 56(avg) and fbs = 1, return number of higher and lesser risk counts 
+#2) If Age above avg and fbs = 1, return number of lower and higher risk counts
+print("Num. of individuals classified as 'Low risk' and have above average 'Age' and 'Fbs' are",two_var_diag1(df_0,"age",56,"fbs",1))
+print("Num. of individuals classified as 'High risk' and have above average 'Age' and 'Fbs' are",two_var_diag1(df_1,"age",56,"fbs",1))
+print("\n")
 
+#3) If Age above avg and CP type = 1, return number of lower and higher risk counts
+print("Num. of individuals classified as 'Low risk' and have above average 'Age' and 'CP' type 1 are",two_var_diag1(df_0,"age",56,"cp",1))
+print("Num. of individuals classified as 'High risk' and have above average 'Age' and 'CP' type 1 are",two_var_diag1(df_1,"age",56,"cp",1))
+print("\n")
 
-#3) Age & chest pain type above avg, return number of higher risk counts
-    #if age > 56(avg) and cp = 1, return number of higher and lesser risk counts
-
-
-
+#Final conclusion
+print("FINAL CONCLUSION")
+print("\n")
+print("Therefore, if an individual has above average 'Age' and a 'CP' of type 1, they are more likely to be classified as 'High risk', compared to those who have above average 'Age'+'Chol', or 'Age'+'Fbs'. However, the combination of above average 'Age' and 'Chol' are much more common.")
 
     
