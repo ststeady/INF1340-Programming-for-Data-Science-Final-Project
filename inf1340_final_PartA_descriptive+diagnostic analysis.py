@@ -71,6 +71,7 @@ print("Therefore, there is also no conclusive evidence to show a direct correlat
 print("\n", "3) FASTING BLOOD SUGAR")
 count = len(df_0[df_0["fbs"]==1])
 
+#The fbs function determines the number of individuals who fall under or over the fbs threshold and are classified as either less or high risk.
 def fbs(fbs_level,risk):
     if fbs_level == "over" and risk == "less":
         count = len(df_0[df_0["fbs"]==1])
@@ -97,6 +98,7 @@ print("Here, we can see a slight correlation between individuals with a fbs unde
 #4) Chest Pain Type - Output
 print("\n", "4) CHEST PAIN TYPE")
 
+#The cp_type function determines the number of individuals within the dataset that belong to the less or high risk category, as well as the type of chest pain they have.
 def cp_type(cp_type,risk):
     if cp_type == 0 and risk == "less":
         count = len(df_0[df_0["cp"]==0])
@@ -141,6 +143,7 @@ print("Here, we can see a correlation between individuals with atypical angina (
 print("DIAGNOSTIC ANALYSIS")
 print("\n","The diagnostic analysis for the chosen variables are as follows:","\n")
 
+#The two_var_diag function looks at the number of dataframe entries (rows) that follow two unique filters based on the variable column and a user inputted value.
 def two_var_diag(output_df,var1,value1,var2,value2):
     return(output_df[(output_df[var1] > value1) & (output_df[var2] > value2)].shape[0])
     
@@ -163,8 +166,16 @@ print("Num. of individuals classified as 'High risk' and have above average 'Age
 print("\n")
 
 #Partial Analysis conclusion
-print("FINAL CONCLUSION")
+print("FINAL PART A CONCLUSION")
 print("\n")
-print("Therefore, if an individual has above average 'Age' and a 'CP' of type 1, they are more likely to be classified as 'High risk', compared to those who have above average 'Age'+'Chol', or 'Age'+'Fbs'. However, the combination of above average 'Age' and 'Chol' are much more common.")
+print("Looking at the descriptive analysis performed, we can conclude that there isn't a strong correlation between age and the probability of a heart attack.")
+print("There is also no conclusive evidence to suggest that there is a direct correlation between higher cholesterol and an increased impact on risk of heart attacks.")
+print("However, we can see that there is a slight correlation between individuals with fbs of over 120 mg/dl and their probabilty of being high risk of heart attacks.")
+print("We can also see that out of the four types of chest pain, type 1 has the largest affect on the risk of heart attack than the other three types.")
+print("\n")
+print("By looking at the diagnostic analysis, we can examine relationships between certain variables, and consequently their joint effect on the risk of heart attacks.")
+print("For example, if an individual has above average 'Age' and a 'CP' of type 1, they are more likely to be classified as 'High risk', compared to those who have above average 'Age'+'Chol', or 'Age'+'Fbs'.")
+print("However, within the entire study dataset, the combination of above average 'Age' and 'Chol' are much more common.")
+
 
     
