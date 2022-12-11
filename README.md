@@ -6,11 +6,12 @@ Cardiovascular disease has become one of the most common conditions nowadays in 
 
 ## Main Features
 
-1. The program includes several functions that can help users explore summary statistics such as mean, maximum, minimum and standard deviation.
-2. The program provides a full report of all the countries' emission analysis, as well as report on country of users' entry. 
-3. The program includes barplot which can visualize $CO^2$ emission over years within a conutry
-4. The program compares two countries' emission in the same year, as well as two years' emission within the same country
-5. The program has customizable functions feature which allows users to get summary statistics of the country and period of their choices.
+1. The program includes several functions that can help users explore descriptive summary statistics such as mean, maximum, minimum and standard deviation of the various specified variables.
+2. The program provides a full diagnostic analysis on top of the aforementioned descriptive summary to highlight key relationships and correlations betweent the variables. 
+3. The program also includes a scatterplot that shows the relationship between age and blood pressure using linear regression functions, as well as a visualization of a correlation matrix. 
+4. The program also conducts a predictive analysis based on the descriptive and diagnostic data generated, and allows for a more in-depth insight into the correlation and future predictions as a result of these analyses.
+5. The program has various API functions that allow for customized outputs based on the users specified parameters of the function arguments.
+6. The program also includes the visualization of a ROC curve for logistic regression.
 
 ## Execution instructions
 
@@ -19,14 +20,14 @@ All functions are executable using the name provided in the .py file. The variab
 ## Example of Running
 
 ```python
-# returns average CO2 emission of Canada between 1990 and 2000
-print(getcustavg("Canada", 1990, 2000))
+# returns an integer number of the individuals within the dataset that have an age of over 56 and a chol of over 251.
+print(two_var_diag(df_0, "age",56,"chol",251))
 
-# report every single countries' summary statistics  
-reportall()
+# returns an integer number of the individuals who have a chest pain of type 0 and are classified as less risk of heart attacks.  
+print(cp_type(0,"less"))
   
-# returns bar plot of Canada's CO2 emission from 1750 to 2017
-getcountrybar("Canada")
+# returns an integer number of the individuals who have a fbs of over 120 ml/dl and are classified as less risk of heart attacks.
+print(fbs("over","less"))
 ```
   
 ## Data and Sources
