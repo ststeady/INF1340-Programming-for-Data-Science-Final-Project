@@ -31,7 +31,7 @@ getcountrybar("Canada")
   
 ## Data and Sources
 
-This dataset is downloaded from Kaggle from the author RASHIK RAHMAN, the data uploading page is titled <em>Heart Attack Analysis & Prediction Dataset<em>. 
+This dataset is downloaded from Kaggle from the author RASHIK RAHMAN, the data uploading page is titled <em>Heart Attack Analysis & Prediction Dataset</em>. 
 
 The data contains 14 entities such as age, sex, number of major vessels, resting blood pressure and so on for 304 selected samples, the data is last updated in 2020.
   
