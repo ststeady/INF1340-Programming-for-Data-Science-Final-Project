@@ -1,0 +1,280 @@
+openapi: 3.1.0
+x-stoplight:
+  id: j27hctles8avg
+info:
+  title: INF1340 Final Project
+  version: '1.0'
+  description: 'This API documents all the function''s arguments, type of arguments, usage, as well as the response, the functions are from INF1340 Final Project, where the program studies the heart attack entities and features for 304 selected samples. '
+  contact:
+    name: Junwei Shen
+    email: junwei.shen@mail.utoronto.ca
+servers:
+  - url: 'http://localhost:3000'
+    description: inf1340finalprojectapi
+paths:
+  '/fbs/{fbs_level}/{risk}':
+    parameters:
+      - schema:
+          type: string
+        name: risk
+        in: path
+        required: true
+        description: 'The risk of heart attack (2 levels: "higher" and "less")'
+      - schema:
+          type: string
+        name: fbs_level
+        in: path
+        required: true
+        description: 'Fasting blood sugar > 120 mg/dl (2 levels: "over" and "under)'
+    get:
+      summary: 'fbs(fbs_level,risk)'
+      tags: []
+      responses:
+        '200':
+          description: Return an integer which is the number of people with "over" or "under" 120mg/dl blood sugar level who is labeled as either "higher" or "lower" risk of heart attack.
+      operationId: fbs()
+      description: Determine the number of individuals with specific blood sugar level who are labeled with a specific level of risk of heart attack.
+  '/cp_type/{cp_type}/{risk}':
+    get:
+      summary: 'cp_type(cp_type,risk)'
+      tags: []
+      responses:
+        '200':
+          description: Return an integer which is the number of people with entered chest pain type  who is labeled as either "higher" or "lower" risk of heart attack.
+      operationId: cp_type()
+      description: Determine the number of individuals with specific chest pain type who are labeled with a specific level of risk of heart attack.
+    parameters:
+      - schema:
+          type: integer
+        name: cp_type
+        in: path
+        required: true
+        description: 'chest pain type (Value 1: typical angina, Value 2: atypical angina, Value 3: non-anginal pain, Value 4: asymptomatic)'
+      - schema:
+          type: string
+        name: risk
+        in: path
+        required: true
+        description: 'The risk of heart attack (2 levels: "higher" and "less")'
+  '/two_var_diag/{output_df}/{var1}/{value1}/{var2}/{value2}':
+    parameters:
+      - schema:
+          type: string
+        name: var1
+        in: path
+        required: true
+        description: selected variable 1 name
+      - schema:
+          type: integer
+        name: value1
+        in: path
+        required: true
+        description: selected threshold value 1
+      - schema:
+          type: string
+        name: var2
+        in: path
+        required: true
+        description: selected variable 2 name
+      - schema:
+          type: integer
+        name: value2
+        in: path
+        required: true
+        description: selected threshold value 2
+      - schema:
+          type: array
+        name: output_df
+        in: path
+        required: true
+        description: This is a selected dataframe
+    get:
+      summary: 'two_var_diag(output_df,var1,value1,var2,value2)'
+      tags: []
+      responses:
+        '200':
+          description: The function returns number of people whose feature "var1" is greater than "value1" and feature "var2" is greater than "value2".
+      operationId: two_var_diag()
+      description: This function selects rows where people whose feature "var1" is greater than "value1" and feature "var2" is greater than "value2".
+  '/two_var_diag1/{output_df}/{var1}/{value1}/{var2}/{value2}':
+    get:
+      summary: 'two_var_diag1(output_df,var1,value1,var2,value2)'
+      tags: []
+      responses:
+        '200':
+          description: The function returns number of people whose feature "var1" is equal to "value1" and feature "var2" is equal to "value2".
+      operationId: two_var_diag1()
+      description: This function selects rows where people whose feature "var1" is equal to "value1" and feature "var2" is equal to "value2".
+    parameters:
+      - schema:
+          type: array
+        name: output_df
+        in: path
+        required: true
+        description: This is a selected dataframe
+      - schema:
+          type: string
+        name: var1
+        in: path
+        required: true
+        description: selected variable 1 name
+      - schema:
+          type: integer
+        name: value1
+        in: path
+        required: true
+        description: selected threshold value 1
+      - schema:
+          type: string
+        name: var2
+        in: path
+        required: true
+        description: selected variable 2 name
+      - schema:
+          type: integer
+        name: value2
+        in: path
+        required: true
+        description: selected threshold value 2
+  '/find_avg/{binary}/{continuous}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      operationId: find_avg()
+      description: 'This function takes the parameters of two columns of the dataframe where col1 is the column of binary variables(0 and 1), and col2 is the column of continuous variables. Function returns the mean of column2 data based on the two groups in column 1 where the first element returned corresponds to 0 and the second element corresponds to 1'
+      responses:
+        '200':
+          description: The function returns a tuple of two means where the first mean corresponds to 0 and the second mean corresponds to 1
+    parameters:
+      - schema:
+          type: array
+        name: binary
+        in: path
+        description: Data frame column of binary variables (0 and 1)
+        required: true
+      - schema:
+          type: array
+        name: continuous
+        in: path
+        required: true
+        description: 'Dataframe column of continuous variables '
+  '/gp_A_num_splitshape/{X}/{y}':
+    get:
+      summary: 'gp_A_num_splitshape(X, y)'
+      tags: []
+      responses:
+        '200':
+          description: The function then split X and y into training and testing datasets and print out the shape of the split
+      operationId: gp_A_num_splitshape()
+      description: 'This function takes the parameters of two numpy arrays, where X is explanatory variable, and Y is response variable. '
+    parameters:
+      - schema:
+          type: array
+        name: X
+        in: path
+        required: true
+        description: The entered explanatory variable which is a NumPy array
+      - schema:
+          type: array
+        name: 'y'
+        in: path
+        required: true
+        description: The entered response variable which is a NumPy array
+  '/gp_A_num_regression/{X_train}/{X_test}/{y_train}/{y_test)/{y_test}':
+    get:
+      summary: 'gp_A_num_regression(X_train, X_test, y_train, y_test)'
+      tags: []
+      responses:
+        '200':
+          description: 'The function fits the training setsinto a linear regression model, compares and prints the predicted results with the testing sets.'
+      operationId: gp_A_num_regression()
+      description: 'This function takes the parameters of four numpy arrays, which are the splited X training sets,x testing sets, y training sets and y testing sets, respectively. '
+    parameters:
+      - schema:
+          type: array
+        name: X_train
+        in: path
+        required: true
+        description: Training explanatory data set
+      - schema:
+          type: array
+        name: X_test
+        in: path
+        required: true
+        description: Testing explanatory data set
+      - schema:
+          type: array
+        name: y_train
+        in: path
+        required: true
+        description: Training response data set
+      - schema:
+          type: array
+        name: y_test
+        in: path
+        required: true
+        description: Testing response data set
+  '/gp_A_num_prediction/{age}/{X_train}/{y_train}':
+    get:
+      summary: 'gp_A_num_prediction(age, X_train, y_train)'
+      tags: []
+      responses:
+        '200':
+          description: 'With the fitted linear regression model, the function returns the predicted value of the response variable given the age entered.'
+      operationId: gp_A_num_prediction()
+      description: 'This function takes the parameters of a numeric variable, and two numpy arrays. The numeric variable is an age from users'' input, and the two arrays are the splited training data sets for X and y. '
+    parameters:
+      - schema:
+          type: integer
+        name: age
+        in: path
+        required: true
+        description: Age of users' entry
+      - schema:
+          type: array
+        name: X_train
+        in: path
+        required: true
+        description: Training explanatory data set
+      - schema:
+          type: array
+        name: y_train
+        in: path
+        required: true
+        description: Training response data set
+  '/gp_A_num_scat/{exp}/{res}/{X_train}/{y_train}':
+    get:
+      summary: 'gp_A_num_scat(exp, res, X_train, y_train)'
+      tags: []
+      responses:
+        '200':
+          description: 'With the fitted linear regression model, the function plots a scatterplot of the entered variables, with a line representing the fitted linear regression model.'
+      operationId: gp_A_num_scat()
+      description: 'This function takes the parameters of two strings, and two numpy arrays. The strings are variable names of the explantory variable and response variable as in the dataframe, and the two arrays are splited training datasets for X and y. '
+    parameters:
+      - schema:
+          type: string
+        name: exp
+        in: path
+        required: true
+        description: explanatory variable name
+      - schema:
+          type: string
+        name: res
+        in: path
+        required: true
+        description: response variable name
+      - schema:
+          type: array
+        name: X_train
+        in: path
+        required: true
+        description: training explanatory data set
+      - schema:
+          type: array
+        name: y_train
+        in: path
+        required: true
+        description: training response data set
+components:
+  schemas: {}
